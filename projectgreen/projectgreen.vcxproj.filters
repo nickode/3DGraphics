@@ -21,6 +21,9 @@
     <ClCompile Include="DataStructures.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="setup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Desktop\kbuF9.jpg">

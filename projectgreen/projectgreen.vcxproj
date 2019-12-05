@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="DataStructures.cpp" />
+    <ClCompile Include="setup.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Desktop\kbuF9.jpg" />
@@ -83,8 +84,8 @@
     <LibraryPath>C:\Users\Nick\source\repos\projectgreen\libs;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LibraryPath>C:\Users\Nick\source\repos\projectgreen\SFML;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
-    <IncludePath>C:\Users\Nick\source\repos\projectgreen\projectgreen;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>C:\Users\Nick\source\repos\green\SFML;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
+    <IncludePath>C:\Users\Nick\source\repos\green\projectgreen;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -114,14 +115,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Nick\source\repos\projectgreen\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Nick\source\repos\green\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Nick\source\repos\projectgreen\SFML</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Nick\source\repos\green\SFML</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

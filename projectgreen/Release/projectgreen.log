@@ -1,83 +1,8 @@
 ﻿  main.cpp
-c:\users\nick\source\repos\projectgreen\projectgreen\main.cpp(22): error C2819: type 'Scene' does not have an overloaded member 'operator ->'
-  c:\users\nick\source\repos\projectgreen\projectgreen\datastructures.h(12): note: see declaration of 'Scene'
-  c:\users\nick\source\repos\projectgreen\projectgreen\main.cpp(22): note: did you intend to use '.' instead?
-c:\users\nick\source\repos\projectgreen\projectgreen\main.cpp(22): error C2232: '->Scene::getWindows': left operand has 'class' type, use '.'
-c:\users\nick\source\repos\projectgreen\projectgreen\main.cpp(33): error C2065: 'window': undeclared identifier
   DataStructures.cpp
-c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory0(881): error C2280: 'sf::RenderWindow::RenderWindow(const sf::RenderWindow &)': attempting to reference a deleted function
-  c:\users\nick\source\repos\projectgreen\include\sfml\graphics\renderwindow.hpp(180): note: compiler has generated 'sf::RenderWindow::RenderWindow' here
-  c:\users\nick\source\repos\projectgreen\include\sfml\graphics\renderwindow.hpp(180): note: 'sf::RenderWindow::RenderWindow(const sf::RenderWindow &)': function was implicitly deleted because a base class invokes a deleted or inaccessible function 'sf::Window::Window(const sf::Window &)'
-  c:\users\nick\source\repos\projectgreen\include\sfml\window\window.hpp(550): note: 'sf::Window::Window(const sf::Window &)': function was implicitly deleted because a base class invokes a deleted or inaccessible function 'sf::NonCopyable::NonCopyable(const sf::NonCopyable &)'
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory(163): note: see reference to function template instantiation 'void std::_Default_allocator_traits<_Alloc>::construct<_Ty,_Ty&>(_Alloc &,_Objty *const ,_Ty &)' being compiled
-          with
-          [
-              _Alloc=std::allocator<sf::RenderWindow>,
-              _Ty=sf::RenderWindow,
-              _Objty=sf::RenderWindow
-          ]
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory(164): note: see reference to function template instantiation 'void std::_Default_allocator_traits<_Alloc>::construct<_Ty,_Ty&>(_Alloc &,_Objty *const ,_Ty &)' being compiled
-          with
-          [
-              _Alloc=std::allocator<sf::RenderWindow>,
-              _Ty=sf::RenderWindow,
-              _Objty=sf::RenderWindow
-          ]
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory(190): note: see reference to function template instantiation 'void std::_Uninitialized_backout_al<_FwdIt,_Alloc>::_Emplace_back<_Ty&>(_Ty &)' being compiled
-          with
-          [
-              _FwdIt=sf::RenderWindow *,
-              _Alloc=std::allocator<sf::RenderWindow>,
-              _Ty=sf::RenderWindow
-          ]
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory(190): note: see reference to function template instantiation 'void std::_Uninitialized_backout_al<_FwdIt,_Alloc>::_Emplace_back<_Ty&>(_Ty &)' being compiled
-          with
-          [
-              _FwdIt=sf::RenderWindow *,
-              _Alloc=std::allocator<sf::RenderWindow>,
-              _Ty=sf::RenderWindow
-          ]
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory(217): note: see reference to function template instantiation '_FwdIt std::_Uninitialized_copy_al_unchecked<_Ty*,_Ty*,_Alloc>(_InIt,const _InIt,const _FwdIt,_Alloc &,std::_General_ptr_iterator_tag,std::_Any_tag)' being compiled
-          with
-          [
-              _FwdIt=sf::RenderWindow *,
-              _Ty=sf::RenderWindow,
-              _Alloc=std::allocator<sf::RenderWindow>,
-              _InIt=sf::RenderWindow *
-          ]
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\vector(1823): note: see reference to function template instantiation '_FwdIt *std::_Uninitialized_copy<_Iter,sf::RenderWindow*,std::allocator<_Ty>>(const _InIt,const _InIt,_FwdIt,_Alloc &)' being compiled
-          with
-          [
-              _FwdIt=sf::RenderWindow *,
-              _Iter=sf::RenderWindow *,
-              _Ty=sf::RenderWindow,
-              _InIt=sf::RenderWindow *,
-              _Alloc=std::allocator<sf::RenderWindow>
-          ]
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\vector(738): note: see reference to function template instantiation 'sf::RenderWindow *std::vector<sf::RenderWindow,std::allocator<_Ty>>::_Ucopy<sf::RenderWindow*>(_Iter,_Iter,sf::RenderWindow *)' being compiled
-          with
-          [
-              _Ty=sf::RenderWindow,
-              _Iter=sf::RenderWindow *
-          ]
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\vector(738): note: see reference to function template instantiation 'sf::RenderWindow *std::vector<sf::RenderWindow,std::allocator<_Ty>>::_Ucopy<sf::RenderWindow*>(_Iter,_Iter,sf::RenderWindow *)' being compiled
-          with
-          [
-              _Ty=sf::RenderWindow,
-              _Iter=sf::RenderWindow *
-          ]
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\vector(732): note: while compiling class template member function 'std::vector<sf::RenderWindow,std::allocator<_Ty>>::vector(const std::vector<_Ty,std::allocator<_Ty>> &)'
-          with
-          [
-              _Ty=sf::RenderWindow
-          ]
-  c:\users\nick\source\repos\projectgreen\projectgreen\datastructures.cpp(18): note: see reference to function template instantiation 'std::vector<sf::RenderWindow,std::allocator<_Ty>>::vector(const std::vector<_Ty,std::allocator<_Ty>> &)' being compiled
-          with
-          [
-              _Ty=sf::RenderWindow
-          ]
-  c:\users\nick\source\repos\projectgreen\projectgreen\datastructures.h(16): note: see reference to class template instantiation 'std::vector<sf::RenderWindow,std::allocator<_Ty>>' being compiled
-          with
-          [
-              _Ty=sf::RenderWindow
-          ]
+  Generating code
+  159 of 160 functions (99.4%) were compiled, the rest were copied from previous compilation.
+    147 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  projectgreen.vcxproj -> C:\Users\Nick\source\repos\green\Release\projectgreen.exe

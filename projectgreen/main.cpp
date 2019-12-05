@@ -16,23 +16,20 @@ void pollEvent(sf::Window& window)
 
 int main()
 {
-	Scene main_menu;
 
 
-	main_menu->getWindows()->push_back(new RenderWindow(sf::VideoMode(800, 600),"Projectgreen"));
+	Scene admin_console;
+
+	sf::RenderWindow window(sf::VideoMode(800,600), "Hey");
+	main_menu.getWindows().push_back(&window);
 		
 
-	while (true)
+	while ()
 	{
 
 		
-	
-		
 
-		
-		window.display();
 	}
 
 	return 0;
 }
-
