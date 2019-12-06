@@ -16,15 +16,26 @@ void pollEvent(sf::Window& window)
 
 int main()
 {
-
-
 	Scene admin_console;
+	Scene main_menu;
+	Scene game;
 
-	sf::RenderWindow window(sf::VideoMode(800,600), "Hey");
-	main_menu.getWindows().push_back(&window);
-		
+	admin_console.setName("Admin Console");
+	admin_console.getWindows().push_back(new RenderWindow(sf::VideoMode(800, 600), "Admin Console"));
 
-	while ()
+	main_menu.setName("Main Menu");
+	main_menu.getWindows().push_back(new RenderWindow(sf::VideoMode(800, 600), "Main Menu"));
+
+	game.setName("Game World");
+
+	SceneManager scenemanager;
+	scenemanager.getScenes().push_back(&admin_console);
+	scenemanager.getScenes().push_back(&main_menu);
+	scenemanager.getScenes().push_back(&game);
+
+	scenemanager.loadNewScene();
+
+	while (scenemanager.getCurrScene()->getWindows().at(0)->isOpen())
 	{
 
 		

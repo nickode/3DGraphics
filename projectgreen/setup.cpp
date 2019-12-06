@@ -2,8 +2,6 @@
 #include <iostream>
 #include <vector>
 
-
-
 int setup()
 {
 

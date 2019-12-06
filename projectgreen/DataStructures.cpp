@@ -70,13 +70,37 @@ SceneManager::~SceneManager()
 
 }
 
-Scene* SceneManager::getScene()
+vector<Scene*> SceneManager::getScenes()
 {
-	return this->scene;
+	return scenes;
 }
 
-void SceneManager::loadScene(Scene* s)
+void SceneManager::addScene(Scene* s)
 {
-	delete this->scene;
-	this->scene = s;
+	scenes.push_back(s);
+}
+
+Scene* SceneManager::getCurrScene()
+{
+	return this->curr_scene;
+}
+
+void SceneManager::loadNewScene()
+{
+	using std::cout; using std::cin; using std::endl;
+
+	cout << "Select a scene to load..." << endl;
+	for (int i = 0; i < scenes.size(); i++)
+	{
+		cout << i+". " <<  scenes.at(i)->getName() << endl;
+	}
+	int choice;
+	cin >> choice;
+	
+	this->curr_scene = scenes.at(choice);
+}
+
+void SceneManager::loadNewScene(int i)
+{
+	this->curr_scene = scenes.at(i);
 }

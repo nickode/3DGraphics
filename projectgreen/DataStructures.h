@@ -45,7 +45,7 @@ public:
 	SceneManager();
 	~SceneManager();
 
-	vector<Scene*> getSceneList();
+	vector<Scene*> getScenes();
 	void addScene(Scene* s);
 
 	Scene* getCurrScene();
