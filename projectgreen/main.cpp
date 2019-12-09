@@ -1,44 +1,30 @@
 #include <SFML/Graphics.hpp>
 #include <DataStructures.h>
-
-void pollEvent(sf::Window& window)
-{
-	sf::Event sfevent;
-	while (window.pollEvent(sfevent))
-	{
-		if (sfevent.type == sf::Event::Closed)
-			window.close();
-		if (sfevent.type == sf::Event::KeyPressed && sfevent.key.code == sf::Keyboard::Left)
-			window.close();
-
-	}
-}
+#include <fstream>
+#include <iostream>
 
 int main()
 {
-	Scene admin_console;
-	Scene main_menu;
-	Scene game;
+	Scene adminconsole(1000, 1000);
+	adminconsole.setName("Admin Console");
+	
+	adminconsole.addEvent(sf::Event::KeyPressed, sf::Keyboard::W);
+	adminconsole.addEvent(sf::Event::KeyPressed, sf::Keyboard::A);
+	adminconsole.addEvent(sf::Event::KeyPressed, sf::Keyboard::S);
+	adminconsole.addEvent(sf::Event::KeyPressed, sf::Keyboard::D);
 
-	admin_console.setName("Admin Console");
-	admin_console.getWindows().push_back(new RenderWindow(sf::VideoMode(800, 600), "Admin Console"));
 
-	main_menu.setName("Main Menu");
-	main_menu.getWindows().push_back(new RenderWindow(sf::VideoMode(800, 600), "Main Menu"));
-
-	game.setName("Game World");
-
-	SceneManager scenemanager;
-	scenemanager.getScenes().push_back(&admin_console);
-	scenemanager.getScenes().push_back(&main_menu);
-	scenemanager.getScenes().push_back(&game);
-
-	scenemanager.loadNewScene();
-
-	while (scenemanager.getCurrScene()->getWindows().at(0)->isOpen())
+	while (adminconsole.getWindow()->isOpen())
 	{
-
-		
+		for (int y = 0; y < adminconsole.rowcolnum; y++)
+		{
+			for (int x = 0; x < adminconsole.rowcolnum; x++)
+			{
+				adminconsole.getWindow()->draw(adminconsole.getRooms().at(0)->getTile(x,y));
+			}
+		}
+		adminconsole.pollEvent();
+		adminconsole.getWindow()->display();
 
 	}
 
