@@ -25,6 +25,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Desktop\kbuF9.jpg" />
+    <Image Include="sandystone.png" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataStructures.h" />

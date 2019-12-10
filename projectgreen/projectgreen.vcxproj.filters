@@ -29,6 +29,9 @@
     <Image Include="..\..\..\..\Desktop\kbuF9.jpg">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="sandystone.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataStructures.h">

@@ -5,22 +5,29 @@
 
 int main()
 {
-	Scene adminconsole(1000, 1000);
+	Scene adminconsole(1024, 1024);
 	adminconsole.setName("Admin Console");
+	adminconsole.addTextureFromFile("sandystone.png");
+
+	
 	
 	adminconsole.addEvent(sf::Event::KeyPressed, sf::Keyboard::W);
 	adminconsole.addEvent(sf::Event::KeyPressed, sf::Keyboard::A);
 	adminconsole.addEvent(sf::Event::KeyPressed, sf::Keyboard::S);
 	adminconsole.addEvent(sf::Event::KeyPressed, sf::Keyboard::D);
 
-
 	while (adminconsole.getWindow()->isOpen())
 	{
-		for (int y = 0; y < adminconsole.rowcolnum; y++)
+		adminconsole.getWindow()->clear();
+		for (int y = 0; y < 32; y++)
 		{
-			for (int x = 0; x < adminconsole.rowcolnum; x++)
+			for (int x = 0; x < 32; x++)
 			{
-				adminconsole.getWindow()->draw(adminconsole.getRooms().at(0)->getTile(x,y));
+				sf::Sprite sprt;
+				sprt.setTexture(*adminconsole.getTextures().at(0));
+				sprt.setScale(0.015625, 0.015625);
+				sprt.setPosition(32*x,32*y);
+				adminconsole.getWindow()->draw(sprt);
 			}
 		}
 		adminconsole.pollEvent();

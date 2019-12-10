@@ -22,30 +22,17 @@ public:
 	~SceneEvent();
 };
 
-class Room
-{
-private:
-	int tilewidth;
-	int tileheight;
-	sf::RectangleShape* grid[25][25];
-public:
-	Room(int w, int h, int rcn);
-	~Room();
-
-	int getTileWidth();
-	int getTileHeight();
-	const sf::RectangleShape& getTile(int i, int j);
-};
-
 class Scene
 {
 private:
 	string name;
+	int width;
+	int height;
 	RenderWindow* window;
 	vector<SceneEvent*> events;
-	vector<Texture> textures;
+	vector<Texture*> textures;
 	vector<Sprite> sprites;
-	vector<Room*> rooms;
+	int viewIndex[30][30];
 
 public:
 	const int rowcolnum = 25;
@@ -61,12 +48,11 @@ public:
 
 	vector<SceneEvent*> getEvents();
 	void addEvent(int et, int kc);
-	vector<Texture> getTextures();
-	void addTexture();
+	vector<Texture*> getTextures();
+	void addTextureFromFile(string fn);
 	vector<Sprite> getSprites();
-	void addSprite();
-	vector<Room*> getRooms();
-	void addRoom();
+	void addSprite(Sprite s);
+
 
 	void printDetails();
 	void pollEvent();

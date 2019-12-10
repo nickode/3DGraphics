@@ -23,13 +23,15 @@ SceneEvent::~SceneEvent()
 Scene::Scene(int w, int h)
 {
 	window = new RenderWindow(sf::VideoMode(w, h), "Unknown scene");
-	rooms.push_back(new Room(w, h, rowcolnum));
+	width = w;
+	height = h;
 }
 
 Scene::Scene(int w, int h, string n)
 {
 	window = new RenderWindow(sf::VideoMode(w, h), n);
-	rooms.push_back(new Room(w, h, rowcolnum));
+	width = w;
+	height = h;
 }
 
 Scene::~Scene()
@@ -63,9 +65,16 @@ void Scene::addEvent(int et, int kc)
 	events.push_back(new SceneEvent(et, kc));
 }
 
-vector<Texture> Scene::getTextures()
+vector<Texture*> Scene::getTextures()
 {
 	return this->textures;
+}
+
+void Scene::addTextureFromFile(string fn)
+{
+	Texture* text = new Texture();
+	text->loadFromFile(fn);
+	textures.push_back(text);
 }
 
 vector<Sprite> Scene::getSprites()
@@ -73,15 +82,6 @@ vector<Sprite> Scene::getSprites()
 	return this->sprites;
 }
 
-vector<Room*> Scene::getRooms()
-{
-	return this->rooms;
-}
-
-void Scene::addRoom()
-{
-	rooms.push_back(new Room(800,800, rowcolnum));
-}
 
 void Scene::printDetails()
 {
@@ -109,8 +109,6 @@ void Scene::pollEvent()
 		}
 	}
 }
-
-
 
 //END SCENE CLASS
 
@@ -162,46 +160,3 @@ void SceneManager::loadNewScene(int i)
 }
 
 //END SCENEMANAGER CLASS
-
-//ROOM CLASS
-
-Room::Room(int w, int h, int rcn)
-{
-	tilewidth = w/rcn;
-	tileheight = h/rcn;
-	for (int x = 0; x < rcn; x++)
-	{
-		for (int y = 0; y < rcn; y++)
-		{
-			sf::RectangleShape* tile = new sf::RectangleShape();
-			tile->setPosition(sf::Vector2f(tilewidth * x, tileheight * y));
-			tile->setSize(sf::Vector2f(tilewidth, tileheight));
-			tile->setFillColor(sf::Color(x+y,x+y,x+y));
-
-			grid[x][y] = tile;
-
-		}
-	}
-}
-
-Room::~Room()
-{
-
-}
-
-int Room::getTileWidth()
-{
-	return tilewidth;
-}
-
-int Room::getTileHeight()
-{
-	return tileheight;
-}
-
-const sf::RectangleShape& Room::getTile(int i, int j)
-{
-	return *grid[i][j];
-}
-
-//END ROOM CLASS
