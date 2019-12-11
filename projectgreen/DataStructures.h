@@ -31,11 +31,10 @@ private:
 	RenderWindow* window;
 	vector<SceneEvent*> events;
 	vector<Texture*> textures;
-	vector<Sprite> sprites;
+	vector<Sprite*> sprites;
 	int viewIndex[30][30];
 
 public:
-	const int rowcolnum = 25;
 
 	Scene(int w, int h);
 	Scene(int w, int h, string n);
@@ -48,11 +47,11 @@ public:
 
 	vector<SceneEvent*> getEvents();
 	void addEvent(int et, int kc);
+
 	vector<Texture*> getTextures();
 	void addTextureFromFile(string fn);
-	vector<Sprite> getSprites();
-	void addSprite(Sprite s);
 
+	vector<Sprite*> getSprites();
 
 	void printDetails();
 	void pollEvent();

@@ -25,6 +25,7 @@ Scene::Scene(int w, int h)
 	window = new RenderWindow(sf::VideoMode(w, h), "Unknown scene");
 	width = w;
 	height = h;
+	sprites.push_back(new Sprite());
 }
 
 Scene::Scene(int w, int h, string n)
@@ -32,6 +33,7 @@ Scene::Scene(int w, int h, string n)
 	window = new RenderWindow(sf::VideoMode(w, h), n);
 	width = w;
 	height = h;
+	sprites.push_back(new Sprite());
 }
 
 Scene::~Scene()
@@ -77,7 +79,7 @@ void Scene::addTextureFromFile(string fn)
 	textures.push_back(text);
 }
 
-vector<Sprite> Scene::getSprites()
+vector<Sprite*> Scene::getSprites()
 {
 	return this->sprites;
 }

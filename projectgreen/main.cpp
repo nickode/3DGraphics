@@ -9,7 +9,8 @@ int main()
 	adminconsole.setName("Admin Console");
 	adminconsole.addTextureFromFile("sandystone.png");
 
-	
+	Texture t = *adminconsole.getTextures().at(0);
+	adminconsole.getSprites().at(0)->setTexture(t);
 	
 	adminconsole.addEvent(sf::Event::KeyPressed, sf::Keyboard::W);
 	adminconsole.addEvent(sf::Event::KeyPressed, sf::Keyboard::A);
@@ -24,9 +25,10 @@ int main()
 			for (int x = 0; x < 32; x++)
 			{
 				sf::Sprite sprt;
-				sprt.setTexture(*adminconsole.getTextures().at(0));
+				sprt.setTexture(t);
 				sprt.setScale(0.015625, 0.015625);
 				sprt.setPosition(32*x,32*y);
+				sprt.setRotation(45);
 				adminconsole.getWindow()->draw(sprt);
 			}
 		}
