@@ -1,8 +1,8 @@
 #include <DataStructures.h>
 
-//SCENEEVENT CLASS
+//WorldEVENT CLASS
 
-SceneEvent::SceneEvent(int et, int kc)
+WorldEvent::WorldEvent(int et, int kc)
 {
 	
 	this->eventtype = et;
@@ -10,99 +10,99 @@ SceneEvent::SceneEvent(int et, int kc)
 	this->keycode = kc;
 }
 
-SceneEvent::~SceneEvent()
+WorldEvent::~WorldEvent()
 {
 
 }
 
-//END SCENEEVENT CLASS
+//END WorldEVENT CLASS
 
 
-//SCENE CLASS
+//World CLASS
 
-Scene::Scene(int w, int h)
+World::World(int w, int h)
 {
-	window = new RenderWindow(sf::VideoMode(w, h), "Unknown scene");
-	width = w;
-	height = h;
+	window = new RenderWindow(sf::VideoMode(w, h), "Unknown World");
+	windowWidth = w;
+	windowHeight = h;
 	sprites.push_back(new Sprite());
 }
 
-Scene::Scene(int w, int h, string n)
+World::World(int w, int h, string n)
 {
 	window = new RenderWindow(sf::VideoMode(w, h), n);
-	width = w;
-	height = h;
+	windowWidth = w;
+	windowHeight = h;
 	sprites.push_back(new Sprite());
 }
 
-Scene::~Scene()
+World::~World()
 {
 	delete window;
 }
 
-string Scene::getName()
+string World::getName()
 {
 	return name.c_str();
 }
 
-void Scene::setName(string n)
+void World::setName(string n)
 {
 	name = n;
 	window->setTitle(n);
 }
 
-RenderWindow* Scene::getWindow()
+RenderWindow* World::getWindow()
 {
 	return this->window;
 }
 
-vector<SceneEvent*> Scene::getEvents()
+vector<WorldEvent*> World::getEvents()
 {
 	return this->events;
 }
 
-void Scene::addEvent(int et, int kc)
+void World::addEvent(int et, int kc)
 {
-	events.push_back(new SceneEvent(et, kc));
+	events.push_back(new WorldEvent(et, kc));
 }
 
-vector<Texture*> Scene::getTextures()
+vector<Texture*> World::getTextures()
 {
 	return this->textures;
 }
 
-void Scene::addTextureFromFile(string fn)
+void World::addTextureFromFile(string fn)
 {
 	Texture* text = new Texture();
 	text->loadFromFile(fn);
 	textures.push_back(text);
 }
 
-vector<Sprite*> Scene::getSprites()
+vector<Sprite*> World::getSprites()
 {
 	return this->sprites;
 }
 
 
-void Scene::printDetails()
+void World::printDetails()
 {
 	using std::cout; using std::cin; using std::endl;
 
-	cout << "Scene: " << name << endl;
+	cout << "World: " << name << endl;
 	cout << "# of Events: " << events.size() << endl;
 	cout << "# of Textures: " << textures.size() << endl;
 	cout << "# of Sprites: " << sprites.size() << endl;
 }
 
-void Scene::pollEvent()
+void World::pollEvent()
 {
 	Event sfevent;
 	while (window->pollEvent(sfevent))
 	{
 		for (int i = 0; i < events.size(); i++)
 		{
-			SceneEvent* theevent = events.at(i); 
+			WorldEvent* theevent = events.at(i); 
 
 			if (sfevent.type == theevent->eventtype && sfevent.key.code == theevent->keycode)
 			{
@@ -112,53 +112,10 @@ void Scene::pollEvent()
 	}
 }
 
-//END SCENE CLASS
-
-//SCENEMANAGER CLASS
-
-SceneManager::SceneManager()
+void World::renderWorld()
 {
 
 }
 
-SceneManager::~SceneManager()
-{
+//END World CLASS
 
-}
-
-vector<Scene> SceneManager::getScenes()
-{
-	return scenes;
-}
-
-void SceneManager::addScene(Scene s)
-{
-	scenes.push_back(s);
-}
-
-Scene* SceneManager::getCurrScene()
-{
-	return this->curr_scene;
-}
-
-void SceneManager::loadNewScene()
-{
-	using std::cout; using std::cin; using std::endl;
-
-	cout << "Select a scene to load..." << endl;
-	for (int i = 0; i < scenes.size(); i++)
-	{
-		cout << i+". " <<  scenes.at(i).getName() << endl;
-	}
-	int choice;
-	cin >> choice;
-	
-	this->curr_scene = &scenes.at(choice);
-}
-
-void SceneManager::loadNewScene(int i)
-{
-	this->curr_scene = &scenes.at(i);
-}
-
-//END SCENEMANAGER CLASS

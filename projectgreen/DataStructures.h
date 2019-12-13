@@ -11,41 +11,41 @@ using sf::Texture;
 using sf::Sprite;
 using std::string;
 
-class SceneEvent
+class WorldEvent
 {
 public:
 	string name;
 	int eventtype;
 	int keycode;
 
-	SceneEvent(int et, int kc);
-	~SceneEvent();
+	WorldEvent(int et, int kc);
+	~WorldEvent();
 };
 
-class Scene
+class World
 {
 private:
 	string name;
-	int width;
-	int height;
+	int windowWidth;
+	int windowHeight;
 	RenderWindow* window;
-	vector<SceneEvent*> events;
+	vector<WorldEvent*> events;
 	vector<Texture*> textures;
 	vector<Sprite*> sprites;
-	int viewIndex[30][30];
+	int viewIndex[240][135];
 
 public:
 
-	Scene(int w, int h);
-	Scene(int w, int h, string n);
-	~Scene();
+	World(int w, int h);
+	World(int w, int h, string n);
+	~World();
 
 	string getName();
 	void setName(string n);
 
 	RenderWindow* getWindow();
 
-	vector<SceneEvent*> getEvents();
+	vector<WorldEvent*> getEvents();
 	void addEvent(int et, int kc);
 
 	vector<Texture*> getTextures();
@@ -55,23 +55,26 @@ public:
 
 	void printDetails();
 	void pollEvent();
+	void renderWorld();
 
 };
 
-class SceneManager
+class Tile
 {
 private:
-	Scene* curr_scene;
-	vector<Scene> scenes;
+	short id;
+	string name;
+	Texture texture;
+	float width;
+	float height;
 public:
-	SceneManager();
-	~SceneManager();
+	short getId();
+	string getName();
+	float getWidth();
+	float getHeight();
 
-	vector<Scene> getScenes();
-	void addScene(Scene s);
-
-	Scene* getCurrScene();
-	void loadNewScene();
-	void loadNewScene(int id);
+	void setName();
+	void setWidth();
+	void setHeight();
 };
 
