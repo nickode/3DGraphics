@@ -1,22 +1,8 @@
 #include <Shader.h>
-#include <Setup.h>
-#include <fstream>
-#include <streambuf>
-
-
-unsigned int Shader::getVertexShader()
-{
-	return vertexshader;
-};
 
 unsigned int Shader::getProgram()
 {
 	return program;
-}
-
-unsigned int Shader::getFragmentShader()
-{
-	return fragmentshader;
 }
 
 Shader::Shader(const char* vfile, const char* ffile)
@@ -66,4 +52,16 @@ Shader::Shader(const char* vfile, const char* ffile)
 
 	glAttachShader(program, vertexshader);
 	glAttachShader(program, fragmentshader);
+	glLinkProgram(program);
+
+	glGetProgramiv(program, GL_LINK_STATUS, &success);
+	if (!success) {
+		glGetProgramInfoLog(program, 512, NULL, infoLog);
+		std::cout << "ERROR LINKING" << std::endl;
+	}
+}
+
+void Shader::use()
+{
+	glUseProgram(program);
 }

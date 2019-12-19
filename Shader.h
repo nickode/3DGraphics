@@ -1,4 +1,7 @@
 #pragma once
+#include <Setup.h>
+#include <fstream>
+#include <streambuf>
 
 class Shader
 {
@@ -9,7 +12,6 @@ private:
 
 public:
 	Shader(const char* vfile, const char* ffile);
-	unsigned int getVertexShader();
-	unsigned int getFragmentShader();
 	unsigned int getProgram();
+	void use();
 };
