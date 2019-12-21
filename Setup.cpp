@@ -1,17 +1,13 @@
 #include <Setup.h>
 
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
 };
 
-void processInput(GLFWwindow *window)
-{
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, true);
-};
 
-GLFWwindow* init()
+GLFWwindow* initOpenGL()
 {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -37,6 +33,8 @@ GLFWwindow* init()
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 	glEnable(GL_DEPTH_TEST);
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	
 
 	return window;
 };

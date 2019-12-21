@@ -127,16 +127,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Data.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Storage.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Setup.cpp" />
     <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Data.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="openglstarterpack.h" />
+    <ClInclude Include="Storage.h" />
     <ClInclude Include="Setup.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="Shapes.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment.shader" />

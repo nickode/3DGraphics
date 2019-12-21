@@ -1,5 +1,6 @@
 #pragma once
-#include <Setup.h>
+#include <openglstarterpack.h>
+#include <iostream>
 #include <fstream>
 #include <streambuf>
 

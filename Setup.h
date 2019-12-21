@@ -1,11 +1,15 @@
 #pragma once
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <iostream>
+#ifndef SETUP
+#define SETUP
+
+#include <openglstarterpack.h>
+#include <Storage.h>
+#include <Shader.h>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void processInput(GLFWwindow *window);
+void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+GLFWwindow* initOpenGL();
 
-GLFWwindow* init();
+#endif
 
 
