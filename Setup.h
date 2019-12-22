@@ -1,15 +1,13 @@
-#pragma once
-#ifndef SETUP
-#define SETUP
-
 #include <openglstarterpack.h>
 #include <Storage.h>
-#include <Shader.h>
+#include <iostream>
+
+extern double currentTime;
+extern double lastTime;
+extern float deltaTime;
+extern bool drawFlag;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void mouse_callback(GLFWwindow* window, double xpos, double ypos);
-GLFWwindow* initOpenGL();
-
-#endif
+GLFWwindow* initOpenGL(unsigned int width, unsigned int height);
 
 

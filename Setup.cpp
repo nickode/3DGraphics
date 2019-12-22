@@ -1,5 +1,9 @@
 #include <Setup.h>
 
+double currentTime = 0.0;
+double lastTime = 0.0;
+float deltaTime = 0.0;
+bool drawFlag = false;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -7,13 +11,13 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 };
 
 
-GLFWwindow* initOpenGL()
+GLFWwindow* initOpenGL(unsigned int width, unsigned int height)
 {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	GLFWwindow* window = glfwCreateWindow(800, 600, "Greenbag", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(width, height, "Greenbag", NULL, NULL);
 	glfwMakeContextCurrent(window);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
