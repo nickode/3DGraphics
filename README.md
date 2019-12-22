@@ -1,2 +1,2 @@
 # p-green
-IN DEVELOPMENT - 2D Game using SDL2
+IN DEVELOPMENT - 3D OpenGL
