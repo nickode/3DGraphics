@@ -1,4 +1,0 @@
-﻿main.obj : error LNK2019: unresolved external symbol glfwInit referenced in function main
-main.obj : error LNK2019: unresolved external symbol glfwWindowHint referenced in function main
-C:\Users\Nick\source\repos\green\\libs\glfw3.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
-C:\Users\Nick\source\repos\green\x64\Debug\green.exe : fatal error LNK1120: 2 unresolved externals
