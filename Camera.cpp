@@ -9,7 +9,26 @@ Camera::Camera()
 	front = new glm::vec3(0.0f, 0.0f, -1.0f);
 	right = new glm::vec3(glm::normalize(glm::cross(*up, *front)));
 	view = new glm::mat4(lookAt(*pos, *pos + *front, *up));
+
+	*front = glm::vec3(cos(verticalAngle) * sin(horizontalAngle),
+		sin(verticalAngle),
+		cos(verticalAngle) * cos(horizontalAngle));
+
+	*cam.right = glm::vec3(sin(horizontalAngle - 3.14f / 2.0f),
+		0,
+		cos(horizontalAngle - 3.14f / 2.0f));
+
+	*up = glm::cross(*right, *front);
 	projection = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
+}
+
+Camera::~Camera()
+{
+	delete up;
+	delete pos;
+	delete front;
+	delete right;
+	delete view;
 }
 
 void mouse_callback_fpv(GLFWwindow* window, double xpos, double ypos)
@@ -26,4 +45,24 @@ void mouse_callback_fpv(GLFWwindow* window, double xpos, double ypos)
 		cos(cam.horizontalAngle - 3.14f / 2.0f));
 
 	*cam.up = glm::cross(*cam.right, *cam.front);
+}
+
+void Camera::moveUp()
+{
+	*pos += speed * deltaTime * *front;
+}
+
+void Camera::moveDown()
+{
+	*pos -= speed * deltaTime * *front;
+}
+
+void Camera::moveRight()
+{
+	*cam.pos += cam.speed * deltaTime * *cam.right;
+}
+
+void Camera::moveLeft()
+{
+	*cam.pos -= cam.speed * deltaTime * *cam.right;
 }

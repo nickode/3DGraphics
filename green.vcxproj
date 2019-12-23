@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Storage.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
@@ -149,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Mesh.h" />
     <ClInclude Include="openglstarterpack.h" />
     <ClInclude Include="Storage.h" />
     <ClInclude Include="Setup.h" />
@@ -158,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment.shader" />
+    <None Include="Tree1.mtl" />
     <None Include="vertex.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

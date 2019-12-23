@@ -36,6 +36,9 @@
     <ClCompile Include="World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Setup.h">
@@ -59,6 +62,9 @@
     <ClInclude Include="World.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="vertex.shader">
@@ -66,6 +72,9 @@
     </None>
     <None Include="fragment.shader">
       <Filter>Source Files</Filter>
+    </None>
+    <None Include="Tree1.mtl">
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
 </Project>

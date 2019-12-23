@@ -2,26 +2,11 @@
 #include <Camera.h>
 #include <Shader.h>
 #include <World.h>
-
-//Game Objects
-GLFWwindow* window;
+#include <thread>
+#include <Mesh.h>
 
 VertexArray* vao;
 VertexBuffer* vbo;
-
-void processInput(GLFWwindow *window)
-{
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		*cam.pos += cam.speed * deltaTime * *cam.front;
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		*cam.pos -= cam.speed * deltaTime * *cam.front;
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		*cam.pos -= cam.speed * deltaTime * *cam.right;
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		*cam.pos += cam.speed * deltaTime * *cam.right;
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, 1);
-};
 
 int main()
 {
@@ -98,19 +83,19 @@ int main()
 
 	GLint iView = glGetUniformLocation(shader.getProgram(), "view");
 	
+	std::thread fps(countFps);
+	//std::thread input(processInput);
+
+	Mesh tree;
+	const char* file = "Tree.obj";
+	tree.loadFromObjFile(file);
 
 	while (!glfwWindowShouldClose(window))
 	{		
+		fpsFlag++;
 
-		currentTime = glfwGetTime();
-		deltaTime = float(currentTime - lastTime);
-		lastTime = currentTime;
-		system("CLS");
-		std::cout << deltaTime * 1000 << std::flush;
-
-
+		processInput();
 		*cam.view = glm::lookAt(*cam.pos, *cam.pos + *cam.front, *cam.up);
-		processInput(window);
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		//glUniformMatrix4fv(glGetUniformLocation(shader.getProgram(), "model"), 1, GL_FALSE, glm::value_ptr(*world.model));
@@ -126,12 +111,17 @@ int main()
 		glfwSetCursorPos(window, 400, 300);
 	}
 
+	stopFps++;
+	fps.join();
+	//stopInput++;
+	//input.join();
+	
 
-	//ebo.deleteThis();
 	vbo->deleteThis();
 	vao->deleteThis();
+	//cam.~Camera();
 
-	
+
 	
 	glfwTerminate();
 
