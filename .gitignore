@@ -1,5 +1,4 @@
-green.exe
-*.obj
 Debug/
+Debug/*.obj
 Release/
-x64/
+Release/*.obj
