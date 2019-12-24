@@ -86,9 +86,9 @@ int main()
 	std::thread fps(countFps);
 	//std::thread input(processInput);
 
-	Mesh tree;
-	const char* file = "Tree.obj";
-	tree.loadFromObjFile(file);
+	//Mesh tree;
+	//const char* file = "Tree.obj";
+	//tree.loadFromObjFile(file);
 
 	while (!glfwWindowShouldClose(window))
 	{		
