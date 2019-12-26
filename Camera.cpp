@@ -49,20 +49,20 @@ void mouse_callback_fpv(GLFWwindow* window, double xpos, double ypos)
 
 void Camera::moveUp()
 {
-	*pos += speed * deltaTime * *front;
+	*pos += speed * *front;
 }
 
 void Camera::moveDown()
 {
-	*pos -= speed * deltaTime * *front;
+	*pos -= speed * *front;
 }
 
 void Camera::moveRight()
 {
-	*cam.pos += cam.speed * deltaTime * *cam.right;
+	*cam.pos += cam.speed * *cam.right;
 }
 
 void Camera::moveLeft()
 {
-	*cam.pos -= cam.speed * deltaTime * *cam.right;
+	*cam.pos -= cam.speed * *cam.right;
 }

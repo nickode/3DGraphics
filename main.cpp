@@ -4,13 +4,31 @@
 #include <World.h>
 #include <thread>
 #include <Mesh.h>
+#define TINYOBJLOADER_IMPLEMENTATION
+#include <tiny_obj_loader.h>
+
 
 VertexArray* vao;
 VertexBuffer* vbo;
 
+int a = 1;
+
+void showFps()
+{
+	while (a)
+	{
+		system("CLS");
+		std::cout << std::flush;
+		std::cout << deltaTime * 1000;
+	}
+}
+
 int main()
 {
 	World world;
+
+
+
 
 	float vertices[] = {          
 		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
@@ -56,6 +74,8 @@ int main()
 		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
 	};
 
+
+
 	unsigned int indices[] = {
 		0, 1, 3, // first triangle
 		1, 2, 3  // second triangle
@@ -93,7 +113,7 @@ int main()
 	while (!glfwWindowShouldClose(window))
 	{		
 		fpsFlag++;
-
+		while (!fpsFlag);
 		processInput();
 		*cam.view = glm::lookAt(*cam.pos, *cam.pos + *cam.front, *cam.up);
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -115,6 +135,8 @@ int main()
 	fps.join();
 	//stopInput++;
 	//input.join();
+
+	a = 0;
 	
 
 	vbo->deleteThis();

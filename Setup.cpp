@@ -19,9 +19,6 @@ void countFps()
 		currentTime = glfwGetTime();
 		deltaTime = float(currentTime - lastTime);
 		lastTime = currentTime;
-		system("CLS");
-		std::cout << std::flush;
-		std::cout << deltaTime * 1000;
 		fpsFlag--;
 	}
 }
