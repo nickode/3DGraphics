@@ -1,12 +1,8 @@
+#include <Mesh.h>
 #include <Setup.h>
 #include <Camera.h>
 #include <Shader.h>
-#include <World.h>
 #include <thread>
-#include <Mesh.h>
-#define TINYOBJLOADER_IMPLEMENTATION
-#include <tiny_obj_loader.h>
-
 
 VertexArray* vao;
 VertexBuffer* vbo;
@@ -25,62 +21,15 @@ void showFps()
 
 int main()
 {
-	World world;
-
-
-
-
-	float vertices[] = {          
-		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-		 0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-
-		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-		-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-
-		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-		-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-
-		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-		 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-		 0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-
-		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-		 0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-
-		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-		-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
-	};
-
-
 
 	unsigned int indices[] = {
 		0, 1, 3, // first triangle
 		1, 2, 3  // second triangle
 	};
-	
+
+
+	Mesh deer;
+	deer.tinyLoader("cylinder.obj");
 
 	window = initOpenGL(800,600);
 	glfwSetCursorPosCallback(window, mouse_callback_fpv);
@@ -92,13 +41,14 @@ int main()
 	//Vertex buffers and arrays
 	vao->bind();
 	vbo->bind();
-	vbo->bufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	//vbo->bufferData(GL_ARRAY_BUFFER, deer.attrib.GetVertices(), &deer.vertices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, deer.attrib.vertices.size() * sizeof(tinyobj::attrib_t), &deer.attrib.vertices[0], GL_STATIC_DRAW);
 	//ebo.bind();
 	//ebo.bufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-	vao->enable(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	vao->enable(0, 8, GL_FLOAT, GL_FALSE, 8 * sizeof(tinyobj::attrib_t), (void*)0);
 	shader.use();
-
-	glUniformMatrix4fv(glGetUniformLocation(shader.getProgram(), "model"), 1, GL_FALSE, glm::value_ptr(*world.model));
+	glm::vec3* model = new glm::vec3(1.0f);
+	glUniformMatrix4fv(glGetUniformLocation(shader.getProgram(), "model"), 1, GL_FALSE, glm::value_ptr(*model));
 	glUniformMatrix4fv(glGetUniformLocation(shader.getProgram(), "projection"), 1, GL_FALSE, glm::value_ptr(cam.projection));
 
 	GLint iView = glGetUniformLocation(shader.getProgram(), "view");
@@ -106,9 +56,8 @@ int main()
 	std::thread fps(countFps);
 	//std::thread input(processInput);
 
-	//Mesh tree;
-	//const char* file = "Tree.obj";
-	//tree.loadFromObjFile(file);
+
+	
 
 	while (!glfwWindowShouldClose(window))
 	{		
@@ -123,7 +72,7 @@ int main()
 		//glUniformMatrix4fv(glGetUniformLocation(shader.getProgram(), "projection"), 1, GL_FALSE, glm::value_ptr(cam.projection));
 
 		vao->bind();
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glDrawArrays(GL_QUADS, 0, deer.shapes.size());
 		vao->unbind();
 
 		glfwSwapBuffers(window);
@@ -135,6 +84,9 @@ int main()
 	fps.join();
 	//stopInput++;
 	//input.join();
+
+	delete model;
+	model = nullptr;
 
 	a = 0;
 	

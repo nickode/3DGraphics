@@ -18,7 +18,7 @@ private:
 public:
 	VertexBuffer();
 	void bind();
-	void bufferData(GLenum target, GLsizei size, const float* vertices, GLenum usage);
+	void bufferData(GLenum target, GLsizei size, glm::vec3* vertices, GLenum usage);
 	void deleteThis();
 };
 

@@ -146,7 +146,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Setup.cpp" />
     <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
@@ -156,11 +155,9 @@
     <ClInclude Include="Setup.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Shapes.h" />
-    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment.shader" />
-    <None Include="Tree1.mtl" />
     <None Include="vertex.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

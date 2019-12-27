@@ -10,7 +10,7 @@ void VertexBuffer::bind()
 	glBindBuffer(GL_ARRAY_BUFFER, id);
 }
 
-void VertexBuffer::bufferData(GLenum target, GLsizei size ,const float* vertices, GLenum usage)
+void VertexBuffer::bufferData(GLenum target, GLsizei size , glm::vec3* vertices, GLenum usage)
 {
 	glBufferData(target, size, vertices, usage);
 }
