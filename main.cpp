@@ -42,10 +42,10 @@ int main()
 	vao->bind();
 	vbo->bind();
 	//vbo->bufferData(GL_ARRAY_BUFFER, deer.attrib.GetVertices(), &deer.vertices[0], GL_STATIC_DRAW);
-	glBufferData(GL_ARRAY_BUFFER, deer.attrib.vertices.size() * sizeof(tinyobj::attrib_t), &deer.attrib.vertices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, deer.attrib.vertices.size() * sizeof(tinyobj::real_t), &deer.attrib.vertices[0], GL_STATIC_DRAW);
 	//ebo.bind();
 	//ebo.bufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-	vao->enable(0, 8, GL_FLOAT, GL_FALSE, 8 * sizeof(tinyobj::attrib_t), (void*)0);
+	vao->enable(0, 8, GL_FLOAT, GL_FALSE, 8 * sizeof(tinyobj::real_t), (void*)0);
 	shader.use();
 	glm::vec3* model = new glm::vec3(1.0f);
 	glUniformMatrix4fv(glGetUniformLocation(shader.getProgram(), "model"), 1, GL_FALSE, glm::value_ptr(*model));
