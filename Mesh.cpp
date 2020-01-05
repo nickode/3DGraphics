@@ -1,50 +1,65 @@
 #pragma once
 #include <Mesh.h>
 
-void Mesh::tinyLoader(const char* filename)
+Mesh::Mesh(std::vector<Vertex> v, std::vector<unsigned int> i, std::vector<Texture> t)
 {
-	std::string warn;
-	std::string err;
+	this->vertices = v;
+	this->indices = i;
+	this->textures = t;
 
-	bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, filename);
-
+	setupMesh();
 }
 
-void Mesh::loadFromObjFile(const char* filename)
+void Mesh::setupMesh()
 {
-	std::ifstream objfile(filename);
-	std::string prop; //currently selected property of the obj file
-	std::string line;
-	
-	float x;
-	float y;
-	float z;
-	
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+	glGenBuffers(1, &EBO);
 
-	while (!objfile.eof()) {
-		std::getline(objfile, line);
-		//objfile.get();
-		
-		if (line[0] == 'v')
-		{
-			objfile >> prop; 
-			objfile >> x;
-			objfile >> y;
-			objfile >> z;
-			//vertices.push_back(glm::vec3(x,y,z));
-			nb_vertices++;
-		}
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
-		if (line[0] == 'vn')
-		{
-			objfile >> prop;
-			objfile >> x;
-			objfile >> y;
-			objfile >> z;
-			//normals.push_back(glm::vec3(x, y, z));
-		}
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
 
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int),
+		&indices[0], GL_STATIC_DRAW);
+
+	// vertex positions
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (void*)0);
+	// vertex normals
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (void*)offsetof(Vertex, Normal));
+	// vertex texture coords
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (void*)offsetof(Vertex, TexCoords));
+
+	glBindVertexArray(0);
+}
+
+void Mesh::Draw()
+{
+	unsigned int diffuseNr = 1;
+	unsigned int specularNr = 1;
+	for (unsigned int i = 0; i < textures.size(); i++)
+	{
+		glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
+		// retrieve texture number (the N in diffuse_textureN)
+		std::string number;
+		std::string name = textures[i].type;
+		if (name == "texture_diffuse")
+			number = std::to_string(diffuseNr++);
+		else if (name == "texture_specular")
+			number = std::to_string(specularNr++);
+
+		//shader.setFloat(("material." + name + number).c_str(), i);
+		glBindTexture(GL_TEXTURE_2D, textures[i].id);
 	}
+	glActiveTexture(GL_TEXTURE0);
 
-	std::cout << "Finished loading" << std::endl;
+	// draw mesh
+	glBindVertexArray(VAO);
+	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
 }
