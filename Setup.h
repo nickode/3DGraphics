@@ -1,5 +1,7 @@
+#ifndef SETUP
+#define SETUP
+
 #include <openglstarterpack.h>
-#include <Storage.h>
 #include <iostream>
 
 //GLFW Context
@@ -19,4 +21,4 @@ void countFps();
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 GLFWwindow* initOpenGL(unsigned int width, unsigned int height);
 
-
+#endif

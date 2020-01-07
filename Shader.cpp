@@ -65,3 +65,8 @@ void Shader::use()
 {
 	glUseProgram(program);
 }
+
+GLint Shader::getId()
+{
+	return id;
+}

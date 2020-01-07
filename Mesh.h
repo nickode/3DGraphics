@@ -4,14 +4,11 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include <assimp/material.h>
-#include <assimp/StringUtils.h>
-#include <assimp/texture.h>
-#include <assimp/types.h>
 #include <assimp/mesh.h>
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+
 
 struct Vertex {
 	glm::vec3 Position;

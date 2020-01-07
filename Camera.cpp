@@ -9,6 +9,8 @@ Camera::Camera()
 	front = new glm::vec3(0.0f, 0.0f, -1.0f);
 	right = new glm::vec3(glm::normalize(glm::cross(*up, *front)));
 	view = new glm::mat4(lookAt(*pos, *pos + *front, *up));
+	projection = new glm::mat4(1.0f);
+	ray_wor = new glm::vec3(1.0f);
 
 	*front = glm::vec3(cos(verticalAngle) * sin(horizontalAngle),
 		sin(verticalAngle),
@@ -19,7 +21,7 @@ Camera::Camera()
 		cos(horizontalAngle - 3.14f / 2.0f));
 
 	*up = glm::cross(*right, *front);
-	projection = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
+	*projection = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
 }
 
 Camera::~Camera()
@@ -45,6 +47,20 @@ void mouse_callback_fpv(GLFWwindow* window, double xpos, double ypos)
 		cos(cam.horizontalAngle - 3.14f / 2.0f));
 
 	*cam.up = glm::cross(*cam.right, *cam.front);
+
+	float x = (2.0f * xpos) / 800 - 1.0f;
+	float y = 1.0f - (2.0f * ypos) / 600;
+	float z = 1.0f;
+	glm::vec4 ray_eye = glm::inverse(*cam.projection) * glm::vec4(x, y, -1.0, 1.0);
+	ray_eye = glm::vec4(ray_eye.x, ray_eye.y, -1.0, 1.0);
+
+	cam.ray_wor->x = (glm::inverse(*cam.view) * ray_eye).x;
+	cam.ray_wor->y = (glm::inverse(*cam.view) * ray_eye).y;
+	cam.ray_wor->z = (glm::inverse(*cam.view) * ray_eye).z;
+	// don't forget to normalise the vector at some point
+	*cam.ray_wor = glm::normalize(*cam.ray_wor);
+
+	
 }
 
 void Camera::moveUp()
