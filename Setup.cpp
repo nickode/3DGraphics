@@ -26,20 +26,20 @@ void countFps()
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
-	*cam.projection = glm::perspective(glm::radians(cam.fov), 4.0f / 3.0f, 0.1f, 100.0f);
+	*projection = glm::perspective(glm::radians(fov), 4.0f / 3.0f, 0.1f, 100.0f);
 };
 
 void processInput()
 {
 
 	if (glfwGetKey(window,GLFW_KEY_W) == GLFW_PRESS)
-		cam.moveUp();
+		moveUp();
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		cam.moveDown();
+		moveDown();
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		cam.moveLeft();
+		moveLeft();
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		cam.moveRight();
+		moveRight();
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, 1);
 		

@@ -140,9 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
-    <ClCompile Include="Storage.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Setup.cpp" />
@@ -151,13 +149,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="openglstarterpack.h" />
-    <ClInclude Include="Storage.h" />
     <ClInclude Include="Setup.h" />
     <ClInclude Include="Shader.h" />
-    <ClInclude Include="Shapes.h" />
     <ClInclude Include="Scene.h" />
   </ItemGroup>
   <ItemGroup>

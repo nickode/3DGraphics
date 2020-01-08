@@ -1,7 +1,5 @@
 #include <Camera.h>
 
-Camera cam;
-
 Camera::Camera()
 {
 	up = new glm::vec3(0.0f, 1.0f, 0.0f);
@@ -16,7 +14,7 @@ Camera::Camera()
 		sin(verticalAngle),
 		cos(verticalAngle) * cos(horizontalAngle));
 
-	*cam.right = glm::vec3(sin(horizontalAngle - 3.14f / 2.0f),
+	*right = glm::vec3(sin(horizontalAngle - 3.14f / 2.0f),
 		0,
 		cos(horizontalAngle - 3.14f / 2.0f));
 
@@ -33,33 +31,32 @@ Camera::~Camera()
 	delete view;
 }
 
-void mouse_callback_fpv(GLFWwindow* window, double xpos, double ypos)
+void Camera::mouse_callback_fpv(GLFWwindow* window, double xpos, double ypos)
 {
-	cam.horizontalAngle += cam.mouseSpeed * deltaTime * float(800 / 2 - xpos);
-	cam.verticalAngle += cam.mouseSpeed * deltaTime * float(600 / 2 - ypos);
+	//Calculate camera view matrix
+	horizontalAngle += mouseSpeed * deltaTime * float(800 / 2 - xpos);
+	verticalAngle += mouseSpeed * deltaTime * float(600 / 2 - ypos);
 
-	*cam.front = glm::vec3(cos(cam.verticalAngle) * sin(cam.horizontalAngle),
-		sin(cam.verticalAngle),
-		cos(cam.verticalAngle) * cos(cam.horizontalAngle));
+	*front = glm::vec3(cos(verticalAngle) * sin(horizontalAngle),
+		sin(verticalAngle),
+		cos(verticalAngle) * cos(horizontalAngle));
 
-	*cam.right = glm::vec3(sin(cam.horizontalAngle - 3.14f / 2.0f),
+	*right = glm::vec3(sin(horizontalAngle - 3.14f / 2.0f),
 		0,
-		cos(cam.horizontalAngle - 3.14f / 2.0f));
+		cos(horizontalAngle - 3.14f / 2.0f));
 
-	*cam.up = glm::cross(*cam.right, *cam.front);
+	*up = glm::cross(*right, *front);
 
+
+	//Calculate camera ray vector
 	float x = (2.0f * xpos) / 800 - 1.0f;
 	float y = 1.0f - (2.0f * ypos) / 600;
 	float z = 1.0f;
-	glm::vec4 ray_eye = glm::inverse(*cam.projection) * glm::vec4(x, y, -1.0, 1.0);
-	ray_eye = glm::vec4(ray_eye.x, ray_eye.y, -1.0, 1.0);
 
-	cam.ray_wor->x = (glm::inverse(*cam.view) * ray_eye).x;
-	cam.ray_wor->y = (glm::inverse(*cam.view) * ray_eye).y;
-	cam.ray_wor->z = (glm::inverse(*cam.view) * ray_eye).z;
-	// don't forget to normalise the vector at some point
-	*cam.ray_wor = glm::normalize(*cam.ray_wor);
-
+	glm::vec4 ray_eye = glm::inverse(*projection) * glm::vec4(x, y, -1.0, 1.0);
+	ray_eye.z = -1.0;
+	ray_eye.w = 1.0;
+	*ray_wor = glm::normalize(glm::vec3((glm::inverse(*view) * ray_eye).x, (glm::inverse(*view) * ray_eye).y, (glm::inverse(*view) * ray_eye).z));
 	
 }
 
@@ -75,10 +72,10 @@ void Camera::moveDown()
 
 void Camera::moveRight()
 {
-	*cam.pos += cam.speed * *cam.right;
+	*pos += speed * *right;
 }
 
 void Camera::moveLeft()
 {
-	*cam.pos -= cam.speed * *cam.right;
+	*pos -= speed * *right;
 }

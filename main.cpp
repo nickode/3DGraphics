@@ -6,13 +6,13 @@
 int main()
 {
 	window = initOpenGL(800,600);
-	glfwSetCursorPosCallback(window, mouse_callback_fpv);
 
+	Scene s;
+	s.cameras.push_back(Camera());
 
-	//World
-	scene.addCylinder();
-	//scene.addCylinder();
-	//scene.translateById(100.0f, 100.0f, 100.0f, 1);
+	s.shaders.push_back(Shader("vertex.shader", "fragment.shader"));
+	
+	glfwSetCursorPosCallback(window, s.cameras[0].mouse_callback_fpv);
 
 
 	glm::vec3 cylinderPositions[] = {
@@ -29,7 +29,7 @@ int main()
 	};
 
 	shader.use();
-	glUniformMatrix4fv(glGetUniformLocation(shader.getProgram(), "projection"), 1, GL_FALSE, glm::value_ptr(*cam.projection));
+	glUniformMatrix4fv(glGetUniformLocation(shader.getProgram(), "projection"), 1, GL_FALSE, glm::value_ptr(*projection));
 	
 	//glUniformMatrix4fv(glGetUniformLocation(shader.getProgram(), "model2"), 1, GL_FALSE, glm::value_ptr(scene.getModel(1)));
 
@@ -45,11 +45,11 @@ int main()
 	while (!glfwWindowShouldClose(window))
 	{		
 		processInput();
-		*cam.view = glm::lookAt(*cam.pos, *cam.pos + *cam.front, *cam.up);
+		*view = glm::lookAt(*pos, *pos + *front, *up);
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
-		glUniformMatrix4fv(iView, 1, GL_FALSE, glm::value_ptr(*cam.view));
+		glUniformMatrix4fv(iView, 1, GL_FALSE, glm::value_ptr(*view));
 
 		scene.Draw();
 

@@ -1,26 +1,22 @@
-#ifndef AAA_HEADER
-#define AAA_HEADER
+#ifndef SCENE
+#define SCENE
 
 #include <Model.h>
-#include <Setup.h>
-
-extern Shader shader("vertex.shader", "fragment.shader");
+#include <Shader.h>
+#include <Camera.h>
 
 class Scene
 {
-private:
-	std::vector<Model> models;
 public:
-	void addCylinder();
+	//Data
+	std::vector<Model> models;
+	std::vector<Shader> shaders;
+	std::vector<Camera> cameras;
 
-		void translateById(float x, float y, float z, unsigned int i);
-
-		glm::mat4 getModel(unsigned int i);
-
-		void Draw();
+	//Functions
+	glm::mat4 getModel(unsigned int i);
+	Camera getCamera(unsigned int i);
+	void Draw();
 };
-
-extern Scene scene;
-
 
 #endif

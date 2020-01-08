@@ -1,3 +1,6 @@
+#ifndef CAMERA
+#define CAMERA
+
 #include <openglstarterpack.h>
 #include <Setup.h>
 
@@ -11,7 +14,6 @@ public:
 	glm::vec3* right;
 	glm::mat4* view;
 	glm::mat4* projection;
-
 	glm::vec3* ray_wor;
 
 	float fov = 45.0f;
@@ -28,13 +30,13 @@ public:
 	void moveLeft();
 	void moveUp();
 	void moveDown();
+	void mouse_callback_fpv(GLFWwindow* window, double xpos, double ypos);
 	
 
 };
 
-extern Camera cam;
+#endif
 
-extern void mouse_callback_fpv(GLFWwindow* window, double xpos, double ypos);
 
 
 
