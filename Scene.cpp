@@ -6,8 +6,7 @@ void Scene::Draw()
 	{
 		
 		glUniformMatrix4fv(glGetUniformLocation(shaders[0].getProgram(), "model"), 1, GL_FALSE, glm::value_ptr(*models[i].model));
-		//	glUniform4fv(glGetUniformLocation(shaders[0].getProgram(), "color"), 1, glm::value_ptr(*models[i].color));
-		glUniform4fv(glGetUniformLocation(shaders[0].getProgram(), "color"), 1, glm::value_ptr(*models[i].color));
+		//glUniform4fv(glGetUniformLocation(shaders[0].getProgram(), "color"), 1, glm::value_ptr(*models[i].color));
 		models[i].Draw();
 	}
 }
