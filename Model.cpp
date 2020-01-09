@@ -106,16 +106,6 @@ unsigned int TextureFromFile(const char *path, const std::string &directory, boo
 	return textureID;
 }
 
-void Model::setShaderProgram(unsigned int i)
-{
-	shaderId = i;
-}
-
-unsigned int Model::getShaderProgram()
-{
-	return shaderId;
-}
-
 void Model::loadModel(std::string path)
 {
 	Assimp::Importer import;
@@ -161,8 +151,8 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 		vector.y = mesh->mVertices[i].y;
 		vector.z = mesh->mVertices[i].z;
 		vertex.Position = vector;
-		/*
-		vector.x = mesh->mNormals[i].x;
+		
+		/*vector.x = mesh->mNormals[i].x;
 		vector.y = mesh->mNormals[i].y;
 		vector.z = mesh->mNormals[i].z;
 		vertex.Normal = vector;*/

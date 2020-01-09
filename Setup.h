@@ -3,9 +3,15 @@
 
 #include <openglstarterpack.h>
 #include <iostream>
+#include <Camera.h>
 
 //GLFW Context
 extern GLFWwindow* window;
+extern Camera* c;
+
+//projection
+extern glm::mat4 projection;
+extern float fov;
 
 //System Variables
 extern double currentTime;
@@ -16,9 +22,12 @@ extern int8_t inputFlag;
 extern int8_t stopFps;
 extern int8_t stopInput;
 
-void processInput();
 void countFps();
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-GLFWwindow* initOpenGL(unsigned int width, unsigned int height);
+GLFWwindow* init(unsigned int width, unsigned int height);
+void processInput();
+void mouse_callback_fpv(GLFWwindow* window, double xpos, double ypos);
+
+
+
 
 #endif
