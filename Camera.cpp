@@ -5,10 +5,13 @@ Camera::Camera()
 
 
 	up = new glm::vec3(0.0f, 1.0f, 0.0f);
-	pos = new glm::vec3(0.0f, 0.0f, 3.0f);
+	pos = new glm::vec3(0.0f, 0.0f, 0.0f);
 	front = new glm::vec3(0.0f, 0.0f, -1.0f);
 	right = new glm::vec3(glm::normalize(glm::cross(*up, *front)));
 	view = new glm::mat4(lookAt(*pos, *pos + *front, *up));
+	
+	
+	
 
 	ray_wor = new glm::vec3(1.0f);
 
@@ -34,20 +37,26 @@ Camera::~Camera()
 
 void Camera::moveUp()
 {
-	*pos += speed * *front;
+	*pos += speed * *front *nullY;
 }
 
 void Camera::moveDown()
 {
-	*pos -= speed * *front;
+	*pos -= speed * *front *nullY;
 }
 
 void Camera::moveRight()
 {
-	*pos += speed * *right;
+	*pos += speed * *right *nullY;
 }
 
 void Camera::moveLeft()
 {
-	*pos -= speed * *right;
+	*pos -= speed * *right *nullY;
+}
+
+void Camera::crouch()
+{
+	isCrouched = true;
+	pos->y -= 3.0f;
 }

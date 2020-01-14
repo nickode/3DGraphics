@@ -11,11 +11,14 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#include <Shader.h>
 
 struct Vertex {
 	glm::vec3 Position;
 	glm::vec3 Normal;
 	glm::vec2 TexCoords;
+	glm::vec3 Tangent;
+	glm::vec3 Bitangent;
 };
 
 struct Texture {
@@ -31,7 +34,9 @@ public:
 	std::vector <unsigned int> indices;
 	std::vector <Texture> textures;
 	Mesh(std::vector<Vertex> v, std::vector<unsigned int> i, std::vector<Texture> t);
-	void Draw();
+	void Draw(Shader s);
+	bool IntersectCamRay(glm::vec3 rp, glm::vec3 rv, glm::vec3& outIntersectionPoint);
+	
 private:
 	unsigned int VAO, VBO, EBO;
 	void setupMesh();
@@ -49,8 +54,10 @@ public:
 		
 	}
 	glm::mat4* model = new glm::mat4();
-	glm::vec4* color = new glm::vec4();
-	void Draw();
+	glm::vec3* color = new glm::vec3();
+	void Draw(Shader s, glm::vec3 rp, glm::vec3 rv);
+
+	bool cameraRayHit;
 private:
 	/*  Model Data  */
 	std::vector<Mesh> meshes;
@@ -63,7 +70,7 @@ private:
 	Mesh processMesh(aiMesh *mesh, const aiScene *scene);
 	std::vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType type,
 		std::string typeName);
-
+	
 };
 
 #endif

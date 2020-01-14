@@ -31,6 +31,7 @@ void mouse_callback_fpv(GLFWwindow* window, double xpos, double ypos)
 
 	*c->up = glm::cross(*c->right, *c->front);
 
+	//std::cout << "front: " << c->pos->x << "," << c->pos->y << "," << c->pos->z << std::endl;
 
 	//Calculate camera ray vector
 	float x = (2.0f * xpos) / 800 - 1.0f;
@@ -46,13 +47,14 @@ void mouse_callback_fpv(GLFWwindow* window, double xpos, double ypos)
 
 }
 
+void fps_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	if (key == GLFW_KEY_E && action == GLFW_PRESS)
+		glfwSetKeyCallback(window, &fps_key_callback);
+}
+
 void processInput()
 {
-	currentTime = glfwGetTime();
-	deltaTime = float(currentTime - lastTime);
-	lastTime = currentTime;
-	*c->view = glm::lookAt(*c->pos, *c->pos + *c->front, *c->up);
-
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		c->moveUp();
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
@@ -61,8 +63,37 @@ void processInput()
 		c->moveLeft();
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		c->moveRight();
+	if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {
+		if (!c->isCrouched)
+			c->crouch();
+	}
+	else if(c->isCrouched)
+	{
+		c->isCrouched = false;
+		c->pos->y += 3.0f;
+	}
+			
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, 1);
+	//if (key == GLFW_KEY_E && action == GLFW_PRESS) 
+		
+}
+
+void godmode_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	if (key == GLFW_KEY_W && action == GLFW_PRESS)
+		c->moveUp();
+	if (key == GLFW_KEY_S && action == GLFW_PRESS)
+		c->moveDown();
+	if (key == GLFW_KEY_A && action == GLFW_PRESS)
+		c->moveLeft();
+	if (key == GLFW_KEY_D && action == GLFW_PRESS)
+		c->moveRight();
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, 1);
+	if (key == GLFW_KEY_E && action == GLFW_PRESS)
+		glfwSetKeyCallback(window, &fps_key_callback);
+		
 };
 
 
@@ -95,7 +126,10 @@ GLFWwindow* init(unsigned int width, unsigned int height)
 	}
 
 	glViewport(0, 0, 800, 600);
-
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_ALWAYS);
+	glEnable(GL_STENCIL_TEST);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 	
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 

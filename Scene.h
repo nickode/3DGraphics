@@ -13,11 +13,7 @@ public:
 	std::vector<Shader> shaders;
 	//std::vector<Camera> cameras;
 
-	//Functions
-	glm::mat4* getMatrix(unsigned int i);
-	Shader getShader(unsigned int i);
-
-	void Draw();					
+	void Draw(Camera* c);					
 };
 
 #endif

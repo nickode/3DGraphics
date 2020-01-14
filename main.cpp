@@ -15,8 +15,6 @@ int main()
 
 	Scene s;
 
-
-	
 	s.shaders.push_back(Shader("vertex.shader","fragment.shader"));
 
 	Shader ss = s.shaders[0];
@@ -29,36 +27,39 @@ int main()
 	glUniformMatrix4fv(glGetUniformLocation(ss.getProgram(), "model"), 1, GL_FALSE, glm::value_ptr(model));
 	
 
-	for (float x = 0.0f; x < 20.0f; x++)
-	{
-		for (float z = 0.0f; z < 20.0f; z++)
-		{
-			Model tile("tile.obj");
-			glm::mat4 model = glm::mat4(1.0f);
-			model = glm::translate(model, glm::vec3(x,0.0f,z));
-			double r = ((double)std::rand() / (RAND_MAX + 10));
-			model = glm::scale(model, glm::vec3(1.0f, float(1+std::rand()/((RAND_MAX + 1u)/50)) ,1.0f));
-			*tile.model = model;
-			*tile.color = glm::vec4(float(1 + std::rand() / ((RAND_MAX + 1u) / 255)), float(1 + std::rand() / ((RAND_MAX + 1u) / 255)), float(1 + std::rand() / ((RAND_MAX + 1u) / 255)), 0.0f);
 
-			s.models.push_back(tile);
-		}
-	}
+	Model floor("floor.obj");
+	*floor.model = model;
+	s.models.push_back(floor);
+
+
+	*c->pos = glm::vec3(0.0f, 0.0f, 0.0f);
 
 	GLint iView = glGetUniformLocation(ss.getProgram(), "view");
-	
+	//GLint iHit = glGetUniformLocation(ss.getProgram(), "hit");
 
+	
+	//glfwSetKeyCallback(window, &godmode_key_callback);
 
 	while (!glfwWindowShouldClose(window))
 	{	
+		
+
+		currentTime = glfwGetTime();
+		deltaTime = float(currentTime - lastTime);
+		lastTime = currentTime;
+		*c->view = glm::lookAt(*c->pos, *c->pos + *c->front, *c->up);
+
 		processInput();
-		glClearColor(0.2f, 0.2f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glUniformMatrix4fv(iView, 1, GL_FALSE, glm::value_ptr(*c->view)); 
+
+		glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+		glUniformMatrix4fv(iView, 1, GL_FALSE, glm::value_ptr(*c->view));
+		
 
 		
 
-		s.Draw();
+		s.Draw(c);
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 		glfwSetCursorPos(window, 400, 300);

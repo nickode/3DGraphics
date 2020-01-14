@@ -24,8 +24,11 @@ extern int8_t stopInput;
 
 void countFps();
 GLFWwindow* init(unsigned int width, unsigned int height);
-void processInput();
+void fps_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+void godmode_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 void mouse_callback_fpv(GLFWwindow* window, double xpos, double ypos);
+
+void processInput();
 
 
 

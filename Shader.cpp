@@ -66,4 +66,14 @@ void Shader::use()
 	glUseProgram(program);
 }
 
+void Shader::setVec3(const char* name, glm::vec3 vec)
+{
+	glUniform3fv(glGetUniformLocation(program, name), 1, &vec[0]);
+}
+
+void Shader::setFloat(const char* name, float f)
+{
+	glUniform1f(glGetUniformLocation(program, name), f);
+}
+
 
