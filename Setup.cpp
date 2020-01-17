@@ -109,7 +109,7 @@ GLFWwindow* init(unsigned int width, unsigned int height)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	GLFWwindow* window = glfwCreateWindow(width, height, "Greenbag", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(width, height, "monk3y", NULL, NULL);
 	glfwMakeContextCurrent(window);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -127,7 +127,8 @@ GLFWwindow* init(unsigned int width, unsigned int height)
 
 	glViewport(0, 0, 800, 600);
 	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_ALWAYS);
+	glDepthFunc(GL_LESS);
+
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_FRONT);
 	//glEnable(GL_STENCIL_TEST);

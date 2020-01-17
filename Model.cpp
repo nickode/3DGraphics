@@ -78,6 +78,7 @@ unsigned int TextureFromFile(const char *path, const std::string &directory, boo
 {
 	std::string filename = std::string(path);
 	filename = filename.substr(filename.find_last_of('\\') + 1);
+	
 	filename = "C:\\Users\\Nick\\source\\repos\\green\\Debug\\textures\\" + filename;
 	
 	
@@ -276,12 +277,9 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureType 
 	return textures;
 }
 
-void Model::Draw(Shader s, glm::vec3 rp, glm::vec3 rv)
+void Model::Draw(Shader s)
 {
-	//glm::vec3 ip; // intersection point
-
 	for (unsigned int i = 0; i < meshes.size(); i++) {
-		//cameraRayHit = meshes[i].IntersectCamRay(rp, rv, ip);
 		meshes[i].Draw(s);
 	}
 }

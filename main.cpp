@@ -31,6 +31,7 @@ int main()
 	Model floor("scene.fbx");
 
 	*floor.model = glm::translate(*floor.model, glm::vec3(0.0f, -10.0f, 0.0f));
+	*floor.model = glm::scale(*floor.model, glm::vec3(1.0f, 1.0f, -1.0f));
 	s.models.push_back(floor);
 
 	*c->pos = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -59,8 +60,8 @@ int main()
 		
 
 		
-
-		s.Draw(c);
+		
+		s.Draw();
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 		glfwSetCursorPos(window, 400, 300);

@@ -50,14 +50,11 @@ public:
 	/*  Functions   */
 	Model(const char* path)
 	{
-		loadModel(path);
-		
+		loadModel(path);	
 	}
 	glm::mat4* model = new glm::mat4(1.0f);
-	glm::vec3* color = new glm::vec3();
-	void Draw(Shader s, glm::vec3 rp, glm::vec3 rv);
+	void Draw(Shader s);
 
-	bool cameraRayHit;
 private:
 	/*  Model Data  */
 	std::vector<Mesh> meshes;

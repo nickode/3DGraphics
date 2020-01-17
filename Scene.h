@@ -5,15 +5,15 @@
 #include <Shader.h>
 #include <Camera.h>
 
-class Scene
+struct Scene
 {
 public:
 	//Data
 	std::vector<Model> models;
 	std::vector<Shader> shaders;
-	//std::vector<Camera> cameras;
-
-	void Draw(Camera* c);					
+	Camera c;
+public:
+	void Draw();
 };
 
 #endif
