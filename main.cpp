@@ -3,8 +3,6 @@
 #include <Scene.h>
 #include <Setup.h>
 
-
-
 int main()
 {
 	window = init(800,600);
@@ -26,14 +24,14 @@ int main()
 
 	glUniformMatrix4fv(glGetUniformLocation(ss.getProgram(), "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 	glUniformMatrix4fv(glGetUniformLocation(ss.getProgram(), "model"), 1, GL_FALSE, glm::value_ptr(model));
-	glUniform3fv(glGetUniformLocation(ss.getProgram(), "color"), 1, glm::value_ptr(color));
+	//glUniform3fv(glGetUniformLocation(ss.getProgram(), "color"), 1, glm::value_ptr(color));
 
 
 
-	Model floor("floor.obj");
-	*floor.model = model;
+	Model floor("scene.fbx");
+
+	*floor.model = glm::translate(*floor.model, glm::vec3(0.0f, -10.0f, 0.0f));
 	s.models.push_back(floor);
-
 
 	*c->pos = glm::vec3(0.0f, 0.0f, 0.0f);
 
@@ -56,7 +54,7 @@ int main()
 		processInput();
 
 		glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glUniformMatrix4fv(iView, 1, GL_FALSE, glm::value_ptr(*c->view));
 		
 

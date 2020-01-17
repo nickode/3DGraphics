@@ -107,7 +107,7 @@ GLFWwindow* init(unsigned int width, unsigned int height)
 {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	GLFWwindow* window = glfwCreateWindow(width, height, "Greenbag", NULL, NULL);
 	glfwMakeContextCurrent(window);
@@ -128,15 +128,17 @@ GLFWwindow* init(unsigned int width, unsigned int height)
 	glViewport(0, 0, 800, 600);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_ALWAYS);
-	glEnable(GL_STENCIL_TEST);
-	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_FRONT);
+	//glEnable(GL_STENCIL_TEST);
+	//glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 	
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-
-	glEnable(GL_DEPTH_TEST);
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
 	c = new Camera();
 
+	
 	
 	
 	return window;

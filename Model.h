@@ -53,7 +53,7 @@ public:
 		loadModel(path);
 		
 	}
-	glm::mat4* model = new glm::mat4();
+	glm::mat4* model = new glm::mat4(1.0f);
 	glm::vec3* color = new glm::vec3();
 	void Draw(Shader s, glm::vec3 rp, glm::vec3 rv);
 
