@@ -54,7 +54,7 @@ public:
 	}
 	glm::mat4* model = new glm::mat4(1.0f);
 	void Draw(Shader s);
-
+	glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f);
 private:
 	/*  Model Data  */
 	std::vector<Mesh> meshes;
