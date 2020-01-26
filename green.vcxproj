@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="Movement.h" />
     <ClInclude Include="openglstarterpack.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="Render.h" />

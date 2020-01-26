@@ -30,6 +30,7 @@ int main()
 	
 	//glfwSetKeyCallback(window, &godmode_key_callback);
 
+
 	while (!glfwWindowShouldClose(window))
 	{	
 		
@@ -37,6 +38,9 @@ int main()
 		currentTime = glfwGetTime();
 		deltaTime = float(currentTime - lastTime);
 		lastTime = currentTime;
+		*c->pos = s.models[0].position;
+		c->pos->y += 10.0f;
+		c->pos->z += 30.0f;
 		*c->view = glm::lookAt(*c->pos, *c->pos + *c->front, *c->up);
 
 		processInput();
