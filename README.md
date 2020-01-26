@@ -1,2 +1,1 @@
-# p-green
-IN DEVELOPMENT - 3D OpenGL
+Realtime 3D Drawing using OpenGL. Side project I'm working on during my free time...
