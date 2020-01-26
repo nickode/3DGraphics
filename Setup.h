@@ -9,9 +9,7 @@
 extern GLFWwindow* window;
 extern Camera* c;
 
-//projection
-extern glm::mat4 projection;
-extern float fov;
+
 
 //System Variables
 extern double currentTime;

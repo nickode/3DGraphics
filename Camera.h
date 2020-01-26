@@ -13,6 +13,7 @@ public:
 	glm::vec3* up;
 	glm::vec3* right;
 	glm::mat4* view;
+	glm::mat4* projection;
 	glm::vec3* ray_wor;
 	glm::vec3 nullY = glm::vec3(1.0f, 0.0f, 1.0f);
 
@@ -21,6 +22,7 @@ public:
 	float speed = 0.5f; // 3 units / second
 	float mouseSpeed = 0.05f;
 	float fps;
+	float fov = 45.0f;
 
 	bool isCrouched = false;
 	

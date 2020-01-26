@@ -7,6 +7,7 @@ Camera::Camera()
 	front = new glm::vec3(0.0f, 0.0f, -1.0f);
 	right = new glm::vec3(glm::normalize(glm::cross(*up, *front)));
 	view = new glm::mat4(lookAt(*pos, *pos + *front, *up));
+	projection = new glm::mat4(glm::perspective(glm::radians(fov), 4.0f / 3.0f, 0.1f, 100.0f));
 	
 	ray_wor = new glm::vec3(1.0f);
 

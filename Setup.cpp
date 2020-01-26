@@ -3,8 +3,8 @@
 GLFWwindow* window;
 Camera* c;
 
-glm::mat4 projection;
-float fov = 45.0f;
+
+//float fov = 45.0f;
 
 double currentTime = 0.0;
 double lastTime = 0.0;
@@ -16,8 +16,6 @@ int8_t stopInput = 0;
 
 void mouse_callback_fpv(GLFWwindow* window, double xpos, double ypos)
 {
-
-
 	c->horizontalAngle += c->mouseSpeed * deltaTime * float(800 / 2 - xpos);
 	c->verticalAngle += c->mouseSpeed * deltaTime * float(600 / 2 - ypos);
 
@@ -38,7 +36,7 @@ void mouse_callback_fpv(GLFWwindow* window, double xpos, double ypos)
 	float y = 1.0f - (2.0f * ypos) / 600;
 	float z = 1.0f;
 
-	glm::vec4 ray_eye = glm::inverse(projection) * glm::vec4(x, y, -1.0, 1.0);
+	glm::vec4 ray_eye = glm::inverse(*c->projection) * glm::vec4(x, y, -1.0, 1.0);
 	ray_eye.z = -1.0;
 	ray_eye.w = 1.0;
 	*c->ray_wor = glm::normalize(glm::vec3((glm::inverse(*c->view) * ray_eye).x, (glm::inverse(*c->view) * ray_eye).y, (glm::inverse(*c->view) * ray_eye).z));
@@ -100,7 +98,7 @@ void godmode_key_callback(GLFWwindow* window, int key, int scancode, int action,
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
-	projection = glm::perspective(glm::radians(fov), 4.0f / 3.0f, 0.1f, 100.0f);
+	*c->projection = glm::perspective(glm::radians(c->fov), 4.0f / 3.0f, 0.1f, 100.0f);
 };
 
 GLFWwindow* init(unsigned int width, unsigned int height)
@@ -135,10 +133,14 @@ GLFWwindow* init(unsigned int width, unsigned int height)
 	//glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 	
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	glfwSetCursorPosCallback(window, &mouse_callback_fpv);
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+	
 
 	c = new Camera();
 
+	
 	
 	
 	
