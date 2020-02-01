@@ -17,8 +17,6 @@ struct Vertex {
 	glm::vec3 Position;
 	glm::vec3 Normal;
 	glm::vec2 TexCoords;
-	glm::vec3 Tangent;
-	glm::vec3 Bitangent;
 };
 
 struct Texture {
@@ -34,8 +32,7 @@ public:
 	std::vector <unsigned int> indices;
 	std::vector <Texture> textures;
 	Mesh(std::vector<Vertex> v, std::vector<unsigned int> i, std::vector<Texture> t);
-	void Draw(Shader s);
-	bool IntersectCamRay(glm::vec3 rp, glm::vec3 rv, glm::vec3& outIntersectionPoint);
+	void Draw(Shader& s);
 	
 private:
 	unsigned int VAO, VBO, EBO;
@@ -53,7 +50,7 @@ public:
 		loadModel(path);	
 	}
 	glm::mat4* model = new glm::mat4(1.0f);
-	void Draw(Shader s);
+	void Draw(Shader& s);
 	glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f);
 private:
 	/*  Model Data  */

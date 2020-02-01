@@ -144,8 +144,7 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Render.cpp" />
-    <ClCompile Include="Setup.cpp" />
+    <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Scene.cpp" />
   </ItemGroup>
@@ -155,8 +154,7 @@
     <ClInclude Include="Movement.h" />
     <ClInclude Include="openglstarterpack.h" />
     <ClInclude Include="PointLight.h" />
-    <ClInclude Include="Render.h" />
-    <ClInclude Include="Setup.h" />
+    <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Scene.h" />
   </ItemGroup>

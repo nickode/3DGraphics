@@ -21,11 +21,9 @@ public:
 	float verticalAngle = 0.0f;
 	float speed = 0.5f; // 3 units / second
 	float mouseSpeed = 0.05f;
-	float fps;
 	float fov = 45.0f;
 
 	bool isCrouched = false;
-	
 
 	Camera();
 	~Camera();
@@ -35,8 +33,6 @@ public:
 	void moveUp();
 	void moveDown();
 	void crouch();
-
-	
 
 };
 

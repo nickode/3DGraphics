@@ -39,7 +39,7 @@ void Mesh::setupMesh()
 	glBindVertexArray(0);
 }
 
-void Mesh::Draw(Shader s)
+void Mesh::Draw(Shader& s)
 {
 	unsigned int diffuseNr = 1;
 	unsigned int specularNr = 1;
@@ -48,24 +48,22 @@ void Mesh::Draw(Shader s)
 	
      	for (unsigned int i = 0; i < textures.size(); i++)
 	{
-		glActiveTexture(GL_TEXTURE0 + i); // active proper texture unit before binding
-				   // retrieve texture number (the N in diffuse_textureN)
+		glActiveTexture(GL_TEXTURE0 + i); //activate ?
+				  
 		std::string number;
-		std::string name = textures[i].type;
-		if (name == "texture_diffuse")
+		std::string type = textures[i].type;
+		if (type == "texture_diffuse")
 			number = std::to_string(diffuseNr++);
-		else if (name == "texture_specular")
-			number = std::to_string(specularNr++); // transfer unsigned int to stream
-		else if (name == "texture_normal")
-			number = std::to_string(normalNr++); // transfer unsigned int to stream
-		else if (name == "texture_height")
-			number = std::to_string(heightNr++); // transfer unsigned int to stream
+		else if (type == "texture_specular")
+			number = std::to_string(specularNr++); 
+		else if (type == "texture_normal")
+			number = std::to_string(normalNr++); 
+		else if (type == "texture_height")
+			number = std::to_string(heightNr++); 
 
-		// now set the sampler to the correct texture unit
-		glUniform1i(glGetUniformLocation(s.getProgram(), (name + number).c_str()), i);
+		glUniform1i(glGetUniformLocation(s.getProgram(), (type + number).c_str()), i); //send to shader
 
-		// and finally bind the texture
-		glBindTexture(GL_TEXTURE_2D, textures[i].id);
+		glBindTexture(GL_TEXTURE_2D, textures[i].id); //bind
 	}
 	
 	// draw mesh
@@ -80,8 +78,6 @@ unsigned int TextureFromFile(const char *path, const std::string &directory, boo
 	filename = filename.substr(filename.find_last_of('\\') + 1);
 	
 	filename = "C:\\Users\\Nick\\source\\repos\\green\\Debug\\textures\\" + filename;
-	
-	
 
 	unsigned int textureID;
 	glGenTextures(1, &textureID);
@@ -190,24 +186,7 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 		}
 		else
 			vertex.TexCoords = glm::vec2(0.0f, 0.0f);
-		// tangent
 
-		if (mesh->mTangents)
-		{
-			vector.x = mesh->mTangents[i].x;
-			vector.y = mesh->mTangents[i].y;
-			vector.z = mesh->mTangents[i].z;
-			vertex.Tangent = vector;
-		}
-
-		if (mesh->mBitangents)
-		{
-			vector.x = mesh->mBitangents[i].x;
-			vector.y = mesh->mBitangents[i].y;
-			vector.z = mesh->mBitangents[i].z;
-			vertex.Bitangent = vector;
-		}
-		
 		vertices.push_back(vertex);
 	}
 	// now wak through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.
@@ -277,7 +256,7 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureType 
 	return textures;
 }
 
-void Model::Draw(Shader s)
+void Model::Draw(Shader& s)
 {
 	for (unsigned int i = 0; i < meshes.size(); i++) {
 		meshes[i].Draw(s);
