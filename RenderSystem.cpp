@@ -58,7 +58,10 @@ void processInput()
 		c->isCrouched = false;
 		c->pos->y += 3.0f;
 	}
-
+	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+	{
+		s->models[0].rotate(0.01f, glm::vec3(1.0f, 0.0f, 0.0f));
+	}
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, 1);
 	//if (key == GLFW_KEY_E && action == GLFW_PRESS) 
@@ -99,6 +102,7 @@ void StartupRenderEngine()
 	glDepthFunc(GL_LESS);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_FRONT);
+	
 
 	//Set callback functions
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
@@ -111,11 +115,17 @@ void StartupRenderEngine()
 
 	//Load models
 	Model player("scene.fbx");
-	Model floor("flooor.fbx"); 
-		*floor.model = glm::translate(*floor.model, glm::vec3(0.0f, 2.0f, 0.0f));
-	s->models.push_back(floor);
-	*player.model = glm::scale(*player.model, glm::vec3(1.0f, 1.0f, -1.0f));
+	Model cottage("cottage.fbx");
+	//cottage.translate(0.0f,0.0f,50.f);
+	cottage.translate(0.0f, 0.0f, 20.0f);
+	cottage.scale(5.0f,5.0f,5.0f);
+	
+	
+	s->models.push_back(cottage);
 	s->models.push_back(player);
+
+	s->c.pos->y -= 100.0f;
+
 
 	//Load shaders and activate default
 	s->shaders.push_back(Shader("vertex.shader", "fragment.shader"));

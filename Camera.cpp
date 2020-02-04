@@ -33,22 +33,22 @@ Camera::~Camera()
 
 void Camera::moveUp()
 {
-	*pos += speed * *front *nullY;
+	*pos += speed * *front;
 }
 
 void Camera::moveDown()
 {
-	*pos -= speed * *front *nullY;
+	*pos -= speed * *front;
 }
 
 void Camera::moveRight()
 {
-	*pos += speed * *right *nullY;
+	*pos += speed * *right ;
 }
 
 void Camera::moveLeft()
 {
-	*pos -= speed * *right *nullY;
+	*pos -= speed * *right ;
 }
 
 void Camera::crouch()

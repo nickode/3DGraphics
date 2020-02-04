@@ -39,7 +39,7 @@ void Mesh::setupMesh()
 	glBindVertexArray(0);
 }
 
-void Mesh::Draw(Shader& s)
+void Mesh::Draw(unsigned int shaderProgram)
 {
 	unsigned int diffuseNr = 1;
 	unsigned int specularNr = 1;
@@ -61,7 +61,7 @@ void Mesh::Draw(Shader& s)
 		else if (type == "texture_height")
 			number = std::to_string(heightNr++); 
 
-		glUniform1i(glGetUniformLocation(s.getProgram(), (type + number).c_str()), i); //send to shader
+		glUniform1i(glGetUniformLocation(shaderProgram, (type + number).c_str()), i); //send to shader
 
 		glBindTexture(GL_TEXTURE_2D, textures[i].id); //bind
 	}
@@ -118,7 +118,7 @@ unsigned int TextureFromFile(const char *path, const std::string &directory, boo
 void Model::loadModel(std::string path)
 {
 	Assimp::Importer import;
-	const aiScene *scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
+	const aiScene *scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_CalcTangentSpace | aiProcess_JoinIdenticalVertices);
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
@@ -128,6 +128,32 @@ void Model::loadModel(std::string path)
 	directory = path.substr(0, path.find_last_of('/'));
 
 	processNode(scene->mRootNode, scene);
+	*model = glm::scale(*model, glm::vec3(1.0, 1.0, -1.0));
+}
+
+void Model::setShader(Shader& s)
+{
+	shaderProgram = s.getProgram();
+}
+
+glm::mat4& Model::getModel()
+{
+	return *model;
+}
+
+void Model::translate(float x, float y, float z)
+{
+	*model = glm::translate(*model, glm::vec3(x, y, z));
+}
+
+void Model::scale(float x, float y, float z)
+{
+	*model = glm::scale(*model, glm::vec3(x, y, z));
+}
+
+void Model::rotate(float a, glm::vec3 dir)
+{
+	*model = glm::rotate(*model, a, dir);
 }
 
 void Model::processNode(aiNode *node, const aiScene *scene)
@@ -227,7 +253,7 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureType 
 {
 	std::vector<Texture> textures;
 	unsigned int textureCount = mat->GetTextureCount(type);
-
+	
 	for (unsigned int i = 0; i < textureCount; i++)
 	{
 		aiString str;
@@ -256,10 +282,10 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureType 
 	return textures;
 }
 
-void Model::Draw(Shader& s)
+void Model::Draw()
 {
 	for (unsigned int i = 0; i < meshes.size(); i++) {
-		meshes[i].Draw(s);
+		meshes[i].Draw(shaderProgram);
 	}
 }
 
