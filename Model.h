@@ -16,7 +16,11 @@
 struct Vertex {
 	glm::vec3 Position;
 	glm::vec3 Normal;
+	glm::vec3 Color;
 	glm::vec2 TexCoords;
+
+	Vertex() {};
+	Vertex(glm::vec3 p, glm::vec3 n, glm::vec3 c, glm::vec2 tc) : Position(p), Normal(n), Color(c), TexCoords(tc) {}
 };
 
 struct Texture {
@@ -25,12 +29,34 @@ struct Texture {
 	aiString path;
 };
 
+class CubeModel
+{
+private:
+	Mesh mesh;
+	Texture text;
+	glm::mat4* model = new glm::mat4(1.0);
+public:
+	CubeModel();
+};
+
+class Cube
+{
+private:
+	CubeModel* model;
+	glm::vec3 position;
+	double size;
+public:
+	Cube(CubeModel* m, glm::vec3 pos);
+
+};
+
 class Mesh
 {
 public:
 	std::vector <Vertex> vertices;
 	std::vector <unsigned int> indices;
 	std::vector <Texture> textures;
+	Mesh();
 	Mesh(std::vector<Vertex> v, std::vector<unsigned int> i, std::vector<Texture> t);
 
 	void Draw(unsigned int shaderProgram);

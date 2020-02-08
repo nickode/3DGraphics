@@ -113,16 +113,7 @@ void StartupRenderEngine()
 	c = new Camera();
 	s = new Scene();
 
-	//Load models
-	Model player("scene.fbx");
-	Model cottage("cottage.fbx");
-	//cottage.translate(0.0f,0.0f,50.f);
-	cottage.translate(0.0f, 0.0f, 20.0f);
-	cottage.scale(5.0f,5.0f,5.0f);
-	
-	
-	s->models.push_back(cottage);
-	s->models.push_back(player);
+	CubeModel Cube();
 
 	s->c.pos->y -= 100.0f;
 
