@@ -1,2 +1,2 @@
-# p-green
-IN DEVELOPMENT - 3D OpenGL
+# 3D Graphics OpenGL prototype
+Small prototype that renders 3D models to the screen with a free-viewing camera. Currently in development....
